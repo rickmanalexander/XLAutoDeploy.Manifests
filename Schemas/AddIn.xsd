@@ -55,7 +55,7 @@
       <xs:enumeration value="dll" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="ArrayOfDependency">
+  <xs:complexType name="Dependencies">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Dependency" type="Dependency" />
     </xs:sequence>

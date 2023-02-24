@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <DocumentationFile>C:\Users\arickman\OneDrive - Atlas Air Worldwide Holdings, Inc\HomeDrive\Work Projects\Software Development\XLAutoDeploy.Manifests\XLAutoDeploy.Manifests.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="7.0.1" />
-  </ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="7.0.0" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="7.0.1" />
+	</ItemGroup>
 </Project>
