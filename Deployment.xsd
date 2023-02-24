@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XLAutoDeploy.Manifests.Deployment"
+		   targetNamespace="https://github.com/XLAutoDeploy.Manifests/Schemas/Deployment.xsd"
+		   elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns="https://github.com/XLAutoDeploy.Manifests/Schemas/Deployment.xsd">
+  <xs:element name="Deployment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="AddInUri" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="AlternateAddInUri" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="Description" type="Description" />
+        <xs:element minOccurs="0" maxOccurs="1" name="Settings" type="DeploymentSettings" />
+        <xs:element minOccurs="0" maxOccurs="1" name="RequiredOperatingSystem" type="RequiredOperatingSystem" />
+        <xs:element minOccurs="0" maxOccurs="1" name="CompatibleFrameworks" type="ArrayOfCompatibleFramework" />
+        <xs:element minOccurs="0" maxOccurs="1" name="DigitalSignature">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:anyAttribute />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Description">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SupportUri" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="Publisher" type="xs:string" />
+    <xs:attribute name="Manufacturer" type="xs:string" />
+    <xs:attribute name="Product" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="DeploymentSettings">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="DeploymentBasis" type="DeploymentBasis" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MinimumRequiredVersion" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MapFileExtensions" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LoadBehavior" type="LoadBehavior" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UpdateBehavior" type="UpdateBehavior" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="DeploymentBasis">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="peruser" />
+      <xs:enumeration value="permachine" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="LoadBehavior">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="LoadOrder" type="xs:unsignedInt" />
+    </xs:sequence>
+    <xs:attribute name="Install" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="UpdateBehavior">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Mode" type="UpdateMode" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RequiresRestart" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RemoveDeprecatedVersion" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NotifyClient" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DoInRealTime" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UpdateExpiration" type="UpdateExpiration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="UpdateMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="normal" />
+      <xs:enumeration value="forced" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UpdateExpiration">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="UnitOfTime" type="UnitOfTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="MaximumAge" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="UnitOfTime">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="minutes" />
+      <xs:enumeration value="days" />
+      <xs:enumeration value="weeks" />
+      <xs:enumeration value="months" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="RequiredOperatingSystem">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Bitness" type="OperatingSystemBitness" />
+    </xs:sequence>
+    <xs:attribute name="SupportUrl" type="xs:string" />
+    <xs:attribute name="Version" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="OperatingSystemBitness">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="none" />
+      <xs:enumeration value="x86" />
+      <xs:enumeration value="x64" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="CompatibleFrameworks">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CompatibleFramework" type="CompatibleFramework" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CompatibleFramework">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SupportedRuntime" type="NetClrVersion" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TargetVersion" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="SupportUrl" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="NetClrVersion">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1.0" />
+      <xs:enumeration value="1.1" />
+      <xs:enumeration value="2.0" />
+      <xs:enumeration value="4.0" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

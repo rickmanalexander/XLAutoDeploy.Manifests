@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XLAutoDeploy.Manifests.AddIn"
+		   targetNamespace="https://github.com/XLAutoDeploy.Manifests/Schemas/AddIn.xsd"
+		   elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns="https://github.com/XLAutoDeploy.Manifests/Schemas/AddIn.xsd">
+  <xs:element name="AddIn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="Uri" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" name="DeploymentUri" type="xs:string" />
+        <xs:element minOccurs="1" maxOccurs="1" name="TargetOfficeInstallation" type="MicrosoftOfficeBitness" />
+        <xs:element minOccurs="0" maxOccurs="1" name="Identity" type="AddInIdentity" />
+        <xs:element minOccurs="1" maxOccurs="1" name="Dependencies" nillable="true" type="ArrayOfDependency" />
+        <xs:element minOccurs="0" maxOccurs="1" name="AssetFiles" type="ArrayOfAssetFile" />
+        <xs:element minOccurs="0" maxOccurs="1" name="DigitalSignature">
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:anyAttribute />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="MicrosoftOfficeBitness">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="x86" />
+      <xs:enumeration value="x64" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AddInIdentity">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="AddInType" type="AddInType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="FileExtension" type="AddInFileExtensionType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="Title" type="xs:string" />
+    <xs:attribute name="Name" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="AddInType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="vba" />
+      <xs:enumeration value="exceldna" />
+      <xs:enumeration value="automation" />
+      <xs:enumeration value="com" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AddInFileExtensionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="xlam" />
+      <xs:enumeration value="xla" />
+      <xs:enumeration value="xll" />
+      <xs:enumeration value="dll" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfDependency">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Dependency" type="Dependency" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Dependency">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="DependencyType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssemblyId" type="AssemblyIdentity" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ManagedAssembly" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FilePlacement" type="FilePlacement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssetFiles" type="ArrayOfAssetFile" />
+    </xs:sequence>
+    <xs:attribute name="Uri" type="xs:string" />
+  </xs:complexType>
+  <xs:simpleType name="DependencyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="prequisite" />
+      <xs:enumeration value="requiredreference" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AssemblyIdentity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Hash" type="Hash" />
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Version" type="xs:string" />
+    <xs:attribute name="PublicKey" type="xs:string" />
+    <xs:attribute name="ProcessorArchitecture" type="xs:string" />
+    <xs:attribute name="Culture" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Hash">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Algorithm" type="SecureHashAlgorithm" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SecureHashAlgorithm">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SHA256" />
+      <xs:enumeration value="SHA384" />
+      <xs:enumeration value="SHA512" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="FilePlacement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="SubDirectory" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="NextToAddIn" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAssetFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AssetFile" type="AssetFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AssetFile">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Writeable" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DecompressIfZipped" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FilePlacement" type="FilePlacement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Hash" type="Hash" />
+    </xs:sequence>
+    <xs:attribute name="Uri" type="xs:string" />
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Size" type="xs:long" use="required" />
+  </xs:complexType>
+</xs:schema>

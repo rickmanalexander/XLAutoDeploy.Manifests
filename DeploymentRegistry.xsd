@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XLAutoDeploy.Manifests.DeploymentRegistry"
+		   targetNamespace="https://github.com/XLAutoDeploy.Manifests/Schemas/DeploymentRegistry.xsd"
+		   elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns="https://github.com/XLAutoDeploy.Manifests/schemas/DeploymentRegistry.xsd">
+  <xs:element name="DeploymentRegistry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="PublishedDeployments" type="ArrayOfPublishedDeployment" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="PublishedDeployments">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PublishedDeployment" type="PublishedDeployment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PublishedDeployment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="FileHost" type="FileHost" />
+    </xs:sequence>
+    <xs:attribute name="ManifestUri" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="FileHost">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="HostType" type="FileHostType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RequiresAuthentication" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="FileHostType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="fileserver" />
+      <xs:enumeration value="webserver" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
