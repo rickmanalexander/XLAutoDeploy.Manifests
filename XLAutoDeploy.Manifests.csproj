@@ -7,10 +7,18 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+	  <DocumentationFile>C:\Users\arickman\OneDrive - Atlas Air Worldwide Holdings, Inc\HomeDrive\Work Projects\Software Development\XLAutoDeploy.Manifests\XLAutoDeploy.Manifests.xml</DocumentationFile>
+	  <OutputPath>bin\Release\netstandard2.0\</OutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.XmlSerializer.Generator" Version="7.0.0" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="7.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="XLAutoDeploy.Manifests.xml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>
