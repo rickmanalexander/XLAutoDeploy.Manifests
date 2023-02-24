@@ -15,7 +15,7 @@ namespace XLAutoDeploy.Manifests
     /// </summary>  
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/Deployment.xsd", IsNullable = false)]
     public sealed class Deployment
     {
         public Deployment() { }

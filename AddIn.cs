@@ -19,7 +19,7 @@ namespace XLAutoDeploy.Manifests
     /// </remarks> 
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "", IsNullable = false)]
+    [XmlRoot(Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/AddIn.xsd", IsNullable = false)]
     public sealed class AddIn
     {
         public AddIn() { }
