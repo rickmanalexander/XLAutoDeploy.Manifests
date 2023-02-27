@@ -59,7 +59,7 @@ namespace XLAutoDeploy.Manifests
         /// <remarks>
         /// The functionality for this property is the same as the <see cref="AddInUri"/> except in the event the <see cref="AddIn.TargetOfficeInstallation"/> defined for the first <see cref="AddInUri"/>, this Uri will be used to pull an <see cref="AddIn"/> with a different <see cref="AddIn.TargetOfficeInstallation"/> that will hopefully be compatible with the client's office instance. <br/> <br/>
         /// Xml Node Type: Element <br/>
-        /// Xml Required: Y
+        /// Xml Required: N
         /// </remarks> 
         //using "shim" property b/c System.Uri is not serializable
         [XmlIgnore]

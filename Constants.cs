@@ -3,9 +3,13 @@ using System.Xml.Serialization;
 
 namespace XLAutoDeploy.Manifests
 {
-    public static class CommonConstantsAndEnums
+    public static class Constants
     {
         public const string XLAutoDeployFileExtention = "xlautodeploy";
+
+        public const string DeploymentManifestParameterizedFileName = "{0}-Deployment.manifest.xml";
+        public const string AddInManifestParameterizedFileName = "{0}-AddIn.manifest.xml";
+        public const string UpdateQueryInfoManifestParameterizedFileName = "{0}-UpdateQueryInfo.manifest.xml";
     }
     
     /// <summary>

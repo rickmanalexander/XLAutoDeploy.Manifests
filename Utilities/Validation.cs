@@ -18,10 +18,10 @@ namespace XLAutoDeploy.Manifests.Utilities
                 {
                     foreach(var dependency in addIn.Dependencies)
                     {
-                        if(!Path.GetExtension(dependency.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                        if(!Path.GetExtension(dependency.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                         {
                             throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(Dependency.Uri)} instance.",
-                                $"The {nameof(Dependency.Uri)} must have a .{CommonConstantsAndEnums.XLAutoDeployFileExtention} file extension.",
+                                $"The {nameof(Dependency.Uri)} must have a .{Constants.XLAutoDeployFileExtention} file extension.",
                                 $"Supply a valid value for {nameof(Dependency.Uri)}."));
                         }
 
@@ -29,10 +29,10 @@ namespace XLAutoDeploy.Manifests.Utilities
                         {
                             foreach (var file in dependency.AssetFiles)
                             {
-                                if (!Path.GetExtension(file.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                                if (!Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                                 {
                                     throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(AssetFile.Uri)} instance.",
-                                        $"The {nameof(AssetFile.Uri)} must have a .{CommonConstantsAndEnums.XLAutoDeployFileExtention} file extension.",
+                                        $"The {nameof(AssetFile.Uri)} must have a .{Constants.XLAutoDeployFileExtention} file extension.",
                                         $"Supply a valid value for {nameof(AssetFile.Uri)}."));
                                 }
                             }
@@ -44,10 +44,10 @@ namespace XLAutoDeploy.Manifests.Utilities
                 {
                     foreach (var file in addIn.AssetFiles)
                     {
-                        if (!Path.GetExtension(file.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                        if (!Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                         {
                             throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(AssetFile.Uri)} instance.",
-                                $"The {nameof(AssetFile.Uri)} must have a .{CommonConstantsAndEnums.XLAutoDeployFileExtention} file extension.",
+                                $"The {nameof(AssetFile.Uri)} must have a .{Constants.XLAutoDeployFileExtention} file extension.",
                                 $"Supply a valid value for {nameof(AssetFile.Uri)}."));
                         }
                     }

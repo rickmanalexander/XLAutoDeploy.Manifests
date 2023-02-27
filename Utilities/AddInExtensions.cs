@@ -10,7 +10,7 @@ namespace XLAutoDeploy.Manifests.Utilities
         {
             RemoveManifestFileExtension(addIn);
 
-            var fullExtension = "." + CommonConstantsAndEnums.XLAutoDeployFileExtention;
+            var fullExtension = "." + Constants.XLAutoDeployFileExtention;
 
             if (addIn?.Dependencies?.Any() == true)
             {
@@ -39,14 +39,14 @@ namespace XLAutoDeploy.Manifests.Utilities
 
         public static void RemoveManifestFileExtension(this AddIn addIn)
         {
-            var fullExtension = "." + CommonConstantsAndEnums.XLAutoDeployFileExtention;
+            var fullExtension = "." + Constants.XLAutoDeployFileExtention;
             var extensionChars = fullExtension.ToCharArray();
 
             if (addIn?.Dependencies?.Any() == true)
             {
                 foreach (var dependency in addIn.Dependencies)
                 {
-                    if (Path.GetExtension(dependency.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                    if (Path.GetExtension(dependency.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                     {
                         dependency.Uri = new Uri(dependency.Uri.AsString().TrimEnd(extensionChars));
                     }
@@ -55,7 +55,7 @@ namespace XLAutoDeploy.Manifests.Utilities
                     {
                         foreach (var file in dependency.AssetFiles)
                         {
-                            if (Path.GetExtension(file.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                            if (Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                             {
                                 file.Uri = new Uri(file.Uri.AsString().TrimEnd(extensionChars));
                             }
@@ -68,7 +68,7 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 foreach (var file in addIn.AssetFiles)
                 {
-                    if (Path.GetExtension(file.Uri.AsString()).Equals(CommonConstantsAndEnums.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                    if (Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                     {
                         file.Uri = new Uri(file.Uri.AsString().TrimEnd(extensionChars));
                     }
