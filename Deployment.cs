@@ -54,31 +54,16 @@ namespace XLAutoDeploy.Manifests
         }
 
         /// <summary>
-        /// Specifies an alternate Uri of the associated <see cref="AddIn"/>.
+        /// Specifies the "Bitness" (either 32 or 64) of the installation of Microsoft Office on which the add-in can run.
         /// </summary>  
         /// <remarks>
-        /// The functionality for this property is the same as the <see cref="AddInUri"/> except in the event the <see cref="AddIn.TargetOfficeInstallation"/> defined for the first <see cref="AddInUri"/>, this Uri will be used to pull an <see cref="AddIn"/> with a different <see cref="AddIn.TargetOfficeInstallation"/> that will hopefully be compatible with the client's office instance. <br/> <br/>
+        /// The physical add-in <see cref="AddIn"/> file must be compatible with this value. Note that 64 bit
+        /// operating systems are compatible with 32 bit installations of Microsoft Office.  <br/> <br/>
         /// Xml Node Type: Element <br/>
-        /// Xml Required: N
+        /// Xml Required: Y
         /// </remarks> 
-        //using "shim" property b/c System.Uri is not serializable
-        [XmlIgnore]
-        public Uri AlternateAddInUri { get; set; }
-
-        [XmlElement("AlternateAddInUri", IsNullable = false)]
-        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
-        public string AlternateAddInUriString
-        {
-            get
-            {
-                return AlternateAddInUri?.AsString();
-            }
-            set
-            {
-                if (!String.IsNullOrEmpty(value))
-                    AlternateAddInUri = new Uri(value);
-            }
-        }
+        [XmlElement("TargetOfficeInstallation", typeof(MicrosoftOfficeBitness), IsNullable = false)]
+        public MicrosoftOfficeBitness TargetOfficeInstallation { get; set; }
 
         /// <summary>
         /// Represents information pertaining to the application and its origin.

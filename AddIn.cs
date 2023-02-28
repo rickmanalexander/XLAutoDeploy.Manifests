@@ -82,18 +82,6 @@ namespace XLAutoDeploy.Manifests
         }
 
         /// <summary>
-        /// Specifies the "Bitness" (either 32 or 64) of the installation of Microsoft Office /on/ which the add-in can run.
-        /// </summary>  
-        /// <remarks>
-        /// The physical add-in <see cref="AddIn"/> file must be compatible with this value. //Note that 64 bit
-        /// operating systems are compatible with 32 bit installations of Microsoft Office.  <br/> <br/>
-        /// Xml Node Type: Element <br/>
-        /// Xml Required: Y
-        /// </remarks> 
-        [XmlElement("TargetOfficeInstallation", typeof(MicrosoftOfficeBitness), IsNullable = false)]
-        public MicrosoftOfficeBitness TargetOfficeInstallation { get; set; }
-
-        /// <summary>
         /// Identifies the attributes associated with a physical add-in file.
         /// </summary>  
         /// <remarks>
