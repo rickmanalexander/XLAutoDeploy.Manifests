@@ -3,18 +3,18 @@
 	<xs:element name="DeploymentRegistry">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="1" name="PublishedDeployments" type="tns:ArrayOfPublishedDeployment" />
+				<xs:element minOccurs="1" maxOccurs="1" name="PublishedDeployments" type="tns:ArrayOfPublishedDeployment" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="ArrayOfPublishedDeployment">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="unbounded" name="PublishedDeployment" type="tns:PublishedDeployment" />
+			<xs:element minOccurs="1" maxOccurs="unbounded" name="PublishedDeployment" type="tns:PublishedDeployment" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PublishedDeployment">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="FileHost" type="tns:FileHost" />
+			<xs:element minOccurs="1" maxOccurs="1" name="FileHost" type="tns:FileHost" />
 		</xs:sequence>
 		<xs:attribute name="ManifestUri" type="xs:string" />
 	</xs:complexType>

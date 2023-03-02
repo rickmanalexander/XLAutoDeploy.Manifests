@@ -3,12 +3,12 @@
 	<xs:element name="Deployment">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="1" name="AddInUri" type="xs:string" />
-				<xs:element minOccurs="0" maxOccurs="1" name="AlternateAddInUri" type="xs:string" />
-				<xs:element minOccurs="0" maxOccurs="1" name="Description" type="tns:Description" />
-				<xs:element minOccurs="0" maxOccurs="1" name="Settings" type="tns:DeploymentSettings" />
-				<xs:element minOccurs="0" maxOccurs="1" name="RequiredOperatingSystem" type="tns:RequiredOperatingSystem" />
-				<xs:element minOccurs="0" maxOccurs="1" name="CompatibleFrameworks" type="tns:ArrayOfCompatibleFramework" />
+				<xs:element minOccurs="1" maxOccurs="1" name="AddInUri" type="xs:string" />
+				<xs:element minOccurs="1" maxOccurs="1" name="AlternateAddInUri" type="xs:string" />
+				<xs:element minOccurs="1" maxOccurs="1" name="Description" type="tns:Description" />
+				<xs:element minOccurs="1" maxOccurs="1" name="Settings" type="tns:DeploymentSettings" />
+				<xs:element minOccurs="1" maxOccurs="1" name="RequiredOperatingSystem" type="tns:RequiredOperatingSystem" />
+				<xs:element minOccurs="1" maxOccurs="1" name="CompatibleFrameworks" type="tns:ArrayOfCompatibleFramework" />
 				<xs:element minOccurs="0" maxOccurs="1" name="DigitalSignature">
 					<xs:complexType mixed="true">
 						<xs:sequence>
@@ -22,7 +22,7 @@
 	</xs:element>
 	<xs:complexType name="Description">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="SupportUri" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="SupportUri" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="Publisher" type="xs:string" />
 		<xs:attribute name="Manufacturer" type="xs:string" />
@@ -31,10 +31,10 @@
 	<xs:complexType name="DeploymentSettings">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="DeploymentBasis" type="tns:DeploymentBasis" />
-			<xs:element minOccurs="0" maxOccurs="1" name="MinimumRequiredVersion" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="MinimumRequiredVersion" type="xs:string" />
 			<xs:element minOccurs="1" maxOccurs="1" name="MapFileExtensions" type="xs:boolean" />
-			<xs:element minOccurs="0" maxOccurs="1" name="LoadBehavior" type="tns:LoadBehavior" />
-			<xs:element minOccurs="0" maxOccurs="1" name="UpdateBehavior" type="tns:UpdateBehavior" />
+			<xs:element minOccurs="1" maxOccurs="1" name="LoadBehavior" type="tns:LoadBehavior" />
+			<xs:element minOccurs="1" maxOccurs="1" name="UpdateBehavior" type="tns:UpdateBehavior" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="DeploymentBasis">
@@ -45,7 +45,7 @@
 	</xs:simpleType>
 	<xs:complexType name="LoadBehavior">
 		<xs:sequence>
-			<xs:element minOccurs="1" maxOccurs="1" name="LoadOrder" type="xs:unsignedInt" />
+			<xs:element minOccurs="0" maxOccurs="1" name="LoadOrder" type="xs:unsignedInt" />
 		</xs:sequence>
 		<xs:attribute name="Install" type="xs:boolean" use="required" />
 	</xs:complexType>
@@ -101,7 +101,7 @@
 	<xs:complexType name="CompatibleFramework">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="SupportedRuntime" type="tns:NetClrVersion" />
-			<xs:element minOccurs="0" maxOccurs="1" name="TargetVersion" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="TargetVersion" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="SupportUrl" type="xs:string" />
 	</xs:complexType>

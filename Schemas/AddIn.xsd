@@ -3,11 +3,11 @@
 	<xs:element name="AddIn">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="1" name="Uri" type="xs:string" />
-				<xs:element minOccurs="0" maxOccurs="1" name="DeploymentUri" type="xs:string" />
+				<xs:element minOccurs="1" maxOccurs="1" name="Uri" type="xs:string" />
+				<xs:element minOccurs="1" maxOccurs="1" name="DeploymentUri" type="xs:string" />
 				<xs:element minOccurs="1" maxOccurs="1" name="TargetOfficeInstallation" type="tns:MicrosoftOfficeBitness" />
-				<xs:element minOccurs="0" maxOccurs="1" name="Identity" type="tns:AddInIdentity" />
-				<xs:element minOccurs="1" maxOccurs="1" name="Dependencies" nillable="true" type="tns:ArrayOfDependency" />
+				<xs:element minOccurs="1" maxOccurs="1" name="Identity" type="tns:AddInIdentity" />
+				<xs:element minOccurs="0" maxOccurs="1" name="Dependencies" nillable="true" type="tns:ArrayOfDependency" />
 				<xs:element minOccurs="0" maxOccurs="1" name="AssetFiles" type="tns:ArrayOfAssetFile" />
 				<xs:element minOccurs="0" maxOccurs="1" name="DigitalSignature">
 					<xs:complexType mixed="true">
@@ -22,7 +22,7 @@
 	</xs:element>
 	<xs:simpleType name="MicrosoftOfficeBitness">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="x86" />
+			<xs:enumeration value="x32" />
 			<xs:enumeration value="x64" />
 		</xs:restriction>
 	</xs:simpleType>
@@ -30,7 +30,7 @@
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="AddInType" type="tns:AddInType" />
 			<xs:element minOccurs="1" maxOccurs="1" name="FileExtension" type="tns:AddInFileExtensionType" />
-			<xs:element minOccurs="0" maxOccurs="1" name="Version" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Version" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="Title" type="xs:string" />
 		<xs:attribute name="Name" type="xs:string" />
@@ -59,10 +59,10 @@
 	<xs:complexType name="Dependency">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Type" type="tns:DependencyType" />
-			<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:long" />
-			<xs:element minOccurs="0" maxOccurs="1" name="AssemblyId" type="tns:AssemblyIdentity" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Size" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="AssemblyId" type="tns:AssemblyIdentity" />
 			<xs:element minOccurs="1" maxOccurs="1" name="ManagedAssembly" type="xs:boolean" />
-			<xs:element minOccurs="0" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
+			<xs:element minOccurs="1" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
 			<xs:element minOccurs="0" maxOccurs="1" name="AssetFiles" type="tns:ArrayOfAssetFile" />
 		</xs:sequence>
 		<xs:attribute name="Uri" type="xs:string" />
@@ -86,7 +86,7 @@
 	<xs:complexType name="Hash">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Algorithm" type="tns:SecureHashAlgorithm" />
-			<xs:element minOccurs="0" maxOccurs="1" name="Value" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Value" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="SecureHashAlgorithm">
@@ -98,7 +98,7 @@
 	</xs:simpleType>
 	<xs:complexType name="FilePlacement">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="SubDirectory" type="xs:string" />
+			<xs:element minOccurs="1" maxOccurs="1" name="SubDirectory" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="NextToAddIn" type="xs:boolean" use="required" />
 	</xs:complexType>
@@ -111,7 +111,7 @@
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Writeable" type="xs:boolean" />
 			<xs:element minOccurs="1" maxOccurs="1" name="DecompressIfZipped" type="xs:boolean" />
-			<xs:element minOccurs="0" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
+			<xs:element minOccurs="1" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
 			<xs:element minOccurs="0" maxOccurs="1" name="Hash" type="tns:Hash" />
 		</xs:sequence>
 		<xs:attribute name="Uri" type="xs:string" />
