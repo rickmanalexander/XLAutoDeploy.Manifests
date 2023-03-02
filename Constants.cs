@@ -7,6 +7,8 @@ namespace XLAutoDeploy.Manifests
     {
         public const string XLAutoDeployFileExtention = "xlautodeploy";
 
+        public const string XLAutoDeploytManifestParameterizedFileName = "{0}-XLAutoDeploy.manifest.xml";
+        public const string DeploymentRegistryParameterizedFileName = "{0}-DeploymentRegistry.xml";
         public const string DeploymentManifestParameterizedFileName = "{0}-Deployment.manifest.xml";
         public const string AddInManifestParameterizedFileName = "{0}-AddIn.manifest.xml";
         public const string UpdateQueryInfoManifestParameterizedFileName = "{0}-UpdateQueryInfo.manifest.xml";

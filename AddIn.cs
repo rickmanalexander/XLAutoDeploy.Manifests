@@ -1,11 +1,11 @@
-﻿using System;
+﻿using XLAutoDeploy.Manifests.Utilities;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.Xml;
 using System.Xml;
 using System.Xml.Serialization;
-
-using XLAutoDeploy.Manifests.Utilities; 
 
 namespace XLAutoDeploy.Manifests
 {
