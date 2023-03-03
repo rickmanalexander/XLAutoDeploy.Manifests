@@ -10,9 +10,12 @@ namespace XLAutoDeploy.Manifests.Utilities
     {
         public static HashSet<string> ProcessorArchitectureValues = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
+            "NONE",
             "MSIL",
             "X86",
-            "IA64"
+            "IA64",
+            "AMD64",
+            "ARM"
         };
 
         public static void ValidateDeploymentAndAddIn(Deployment deployment, AddIn addIn)
@@ -588,7 +591,7 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
     $"The {nameof(AssemblyIdentity.ProcessorArchitecture)} value {assemblyId.ProcessorArchitecture} is not defined.",
-    $"Supply a valid value from the following list for {nameof(AssemblyIdentity.ProcessorArchitecture)}: {String.Join(",", ProcessorArchitectureValues)}."));
+    $"Supply a valid value from the following list for {nameof(AssemblyIdentity.ProcessorArchitecture)}: {String.Join(", ", ProcessorArchitectureValues)}."));
             }
         }
 

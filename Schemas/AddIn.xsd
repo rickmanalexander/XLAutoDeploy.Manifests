@@ -83,9 +83,12 @@
 		<xs:attribute use="required" name="ProcessorArchitecture">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
+					<xs:enumeration value="none"/>
 					<xs:enumeration value="msil"/>
 					<xs:enumeration value="x86"/>
 					<xs:enumeration value="iA64"/>
+					<xs:enumeration value="amd64"/>
+					<xs:enumeration value="arm"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
