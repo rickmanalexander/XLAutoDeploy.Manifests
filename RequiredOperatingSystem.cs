@@ -21,7 +21,6 @@ namespace XLAutoDeploy.Manifests
         [XmlAttribute]
         public string SupportUrl { get; set; }
 
-
         /// <summary>
         /// Gets the enumeration value that identifies the platform of the target OS.
         /// </summary>  

@@ -17,6 +17,10 @@ namespace XLAutoDeploy.Manifests
         /// <summary>
         /// Represents the locations of one or more <see cref="PublishedDeployment"/>'s.
         /// </summary>  
+        /// <remarks>
+        /// Xml Node Type: Element <br/>
+        /// Xml Required: Y
+        /// </remarks> 
         [XmlArray("PublishedDeployments", IsNullable = false), XmlArrayItem(typeof(PublishedDeployment), ElementName = "PublishedDeployment", IsNullable = false)]
         public List<PublishedDeployment> PublishedDeployments { get; set; }
     }

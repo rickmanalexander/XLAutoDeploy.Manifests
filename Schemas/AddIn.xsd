@@ -32,8 +32,8 @@
 			<xs:element minOccurs="1" maxOccurs="1" name="FileExtension" type="tns:AddInFileExtensionType" />
 			<xs:element minOccurs="1" maxOccurs="1" name="Version" type="xs:string" />
 		</xs:sequence>
-		<xs:attribute name="Title" type="xs:string" />
-		<xs:attribute name="Name" type="xs:string" />
+		<xs:attribute use="required" name="Title" type="xs:string" />
+		<xs:attribute use="required" name="Name" type="xs:string" />
 	</xs:complexType>
 	<xs:simpleType name="AddInType">
 		<xs:restriction base="xs:string">
@@ -59,13 +59,13 @@
 	<xs:complexType name="Dependency">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Type" type="tns:DependencyType" />
-			<xs:element minOccurs="0" maxOccurs="1" name="Size" type="xs:long" />
+			<xs:element minOccurs="1" maxOccurs="1" name="Size" type="xs:long" />
 			<xs:element minOccurs="1" maxOccurs="1" name="AssemblyId" type="tns:AssemblyIdentity" />
 			<xs:element minOccurs="1" maxOccurs="1" name="ManagedAssembly" type="xs:boolean" />
 			<xs:element minOccurs="1" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
 			<xs:element minOccurs="0" maxOccurs="1" name="AssetFiles" type="tns:ArrayOfAssetFile" />
 		</xs:sequence>
-		<xs:attribute name="Uri" type="xs:string" />
+		<xs:attribute use="required" name="Uri" type="xs:string" />
 	</xs:complexType>
 	<xs:simpleType name="DependencyType">
 		<xs:restriction base="xs:string">
@@ -77,10 +77,18 @@
 		<xs:sequence>
 			<xs:element minOccurs="0" maxOccurs="1" name="Hash" type="tns:Hash" />
 		</xs:sequence>
-		<xs:attribute name="Name" type="xs:string" />
-		<xs:attribute name="Version" type="xs:string" />
+		<xs:attribute use="required" name="Name" type="xs:string" />
+		<xs:attribute use="required" name="Version" type="xs:string" />
 		<xs:attribute name="PublicKey" type="xs:string" />
-		<xs:attribute name="ProcessorArchitecture" type="xs:string" />
+		<xs:attribute use="required" name="ProcessorArchitecture">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="msil"/>
+					<xs:enumeration value="x86"/>
+					<xs:enumeration value="iA64"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 		<xs:attribute name="Culture" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="Hash">
@@ -98,9 +106,9 @@
 	</xs:simpleType>
 	<xs:complexType name="FilePlacement">
 		<xs:sequence>
-			<xs:element minOccurs="1" maxOccurs="1" name="SubDirectory" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SubDirectory" type="xs:string" />
 		</xs:sequence>
-		<xs:attribute name="NextToAddIn" type="xs:boolean" use="required" />
+		<xs:attribute use="required" name="NextToAddIn" type="xs:boolean" />
 	</xs:complexType>
 	<xs:complexType name="ArrayOfAssetFile">
 		<xs:sequence>
@@ -110,12 +118,12 @@
 	<xs:complexType name="AssetFile">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Writeable" type="xs:boolean" />
-			<xs:element minOccurs="1" maxOccurs="1" name="DecompressIfZipped" type="xs:boolean" />
+			<xs:element minOccurs="0" maxOccurs="1" name="DecompressIfZipped" type="xs:boolean" />
 			<xs:element minOccurs="1" maxOccurs="1" name="FilePlacement" type="tns:FilePlacement" />
 			<xs:element minOccurs="0" maxOccurs="1" name="Hash" type="tns:Hash" />
 		</xs:sequence>
-		<xs:attribute name="Uri" type="xs:string" />
-		<xs:attribute name="Name" type="xs:string" />
-		<xs:attribute name="Size" type="xs:long" use="required" />
+		<xs:attribute use="required" name="Uri" type="xs:string" />
+		<xs:attribute use="required" name="Name" type="xs:string" />
+		<xs:attribute use="required" name="Size" type="xs:long" />
 	</xs:complexType>
 </xs:schema>

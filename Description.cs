@@ -1,9 +1,9 @@
-﻿using System;
+﻿using XLAutoDeploy.Manifests.Utilities;
+
+using System;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
-
-using XLAutoDeploy.Manifests.Utilities;
 
 namespace XLAutoDeploy.Manifests
 {
@@ -40,7 +40,7 @@ namespace XLAutoDeploy.Manifests
         /// </summary>  
         /// <remarks>
         /// Xml Node Type: Attribute <br/>
-        /// Xml Required: N 
+        /// Xml Required: Y 
         /// </remarks>  
         [XmlAttribute]
         public string Product { get; set; }

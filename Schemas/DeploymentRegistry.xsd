@@ -16,7 +16,7 @@
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="FileHost" type="tns:FileHost" />
 		</xs:sequence>
-		<xs:attribute name="ManifestUri" type="xs:string" />
+		<xs:attribute use="required" name="ManifestUri" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="FileHost">
 		<xs:sequence>

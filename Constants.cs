@@ -11,7 +11,7 @@ namespace XLAutoDeploy.Manifests
         public const string DeploymentRegistryParameterizedFileName = "{0}-DeploymentRegistry.xml";
         public const string DeploymentManifestParameterizedFileName = "{0}-Deployment.manifest.xml";
         public const string AddInManifestParameterizedFileName = "{0}-AddIn.manifest.xml";
-        public const string UpdateQueryInfoManifestParameterizedFileName = "{0}-UpdateQueryInfo.manifest.xml";
+        public const string UpdateQueryInfoParameterizedFileName = "{0}-UpdateQueryInfo.xml";
     }
     
     /// <summary>

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using XLAutoDeploy.Manifests.Utilities;
+
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
-using System.Xml;
-
-using XLAutoDeploy.Manifests.Utilities; 
+using System.Xml; 
 
 namespace XLAutoDeploy.Manifests.DigSig
 {

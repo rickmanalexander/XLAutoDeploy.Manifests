@@ -68,7 +68,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks> 
-        [XmlElement("Writeable", IsNullable = false)]
+        [XmlElement(IsNullable = false)]
         public bool Writeable { get; set; }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks> 
-        [XmlElement("DecompressIfZipped", IsNullable = false)]
+        [XmlElement(IsNullable = false)]
         public bool DecompressIfZipped { get; set; }
 
         /// <summary>

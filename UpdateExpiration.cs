@@ -17,7 +17,6 @@ namespace XLAutoDeploy.Manifests
         [XmlIgnore]
         public string Description => $"Check for update every {MaximumAge} {Enum.GetName(typeof(UnitOfTime), UnitOfTime)}";
 
-
         /// <summary>
         /// Identifies the unit of time for the <see cref="P:MaximumAge"/>. Valid units are hours, 
         /// days, and weeks.

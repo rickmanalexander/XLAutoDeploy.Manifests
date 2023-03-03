@@ -26,7 +26,6 @@ namespace XLAutoDeploy.Manifests
         [XmlElement("DeploymentBasis", typeof(DeploymentBasis), IsNullable = false)]
         public DeploymentBasis DeploymentBasis { get; set; }
 
-
         /// <summary>
         /// Specifies the minimum version of the application that can run on the client.
         /// </summary>  

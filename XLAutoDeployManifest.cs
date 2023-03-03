@@ -16,6 +16,15 @@ namespace XLAutoDeploy.Manifests
     {
         public XLAutoDeployManifest() { }
 
+        /// <summary>
+        /// Specifies the Uri of the associated <see cref="DeploymentRegistry"/>.
+        /// </summary>  
+        /// <remarks>
+        /// This is used to locate and de-serialize the <see cref="DeploymentRegistry"/> manifest file on 
+        /// the remote <see cref="FileHost"/>. <br/> <br/>
+        /// Xml Node Type: Element <br/>
+        /// Xml Required: Y
+        /// </remarks> 
         [XmlIgnore]
         public Uri DeploymentRegistryUri { get; set; }
 

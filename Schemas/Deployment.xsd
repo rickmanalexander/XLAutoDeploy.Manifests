@@ -24,9 +24,9 @@
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="SupportUri" type="xs:string" />
 		</xs:sequence>
-		<xs:attribute name="Publisher" type="xs:string" />
-		<xs:attribute name="Manufacturer" type="xs:string" />
-		<xs:attribute name="Product" type="xs:string" />
+		<xs:attribute use="required" name="Publisher" type="xs:string" />
+		<xs:attribute use="required" name="Manufacturer" type="xs:string" />
+		<xs:attribute use="required" name="Product" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="DeploymentSettings">
 		<xs:sequence>
@@ -47,7 +47,7 @@
 		<xs:sequence>
 			<xs:element minOccurs="0" maxOccurs="1" name="LoadOrder" type="xs:unsignedInt" />
 		</xs:sequence>
-		<xs:attribute name="Install" type="xs:boolean" use="required" />
+		<xs:attribute use="required" name="Install" type="xs:boolean" />
 	</xs:complexType>
 	<xs:complexType name="UpdateBehavior">
 		<xs:sequence>
@@ -83,8 +83,8 @@
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="Bitness" type="tns:OperatingSystemBitness" />
 		</xs:sequence>
-		<xs:attribute name="SupportUrl" type="xs:string" />
-		<xs:attribute name="Version" type="xs:string" />
+		<xs:attribute use="required" name="SupportUrl" type="xs:string" />
+		<xs:attribute use="required" name="Version" type="xs:string" />
 	</xs:complexType>
 	<xs:simpleType name="OperatingSystemBitness">
 		<xs:restriction base="xs:string">
@@ -103,7 +103,7 @@
 			<xs:element minOccurs="1" maxOccurs="1" name="SupportedRuntime" type="tns:NetClrVersion" />
 			<xs:element minOccurs="1" maxOccurs="1" name="TargetVersion" type="xs:string" />
 		</xs:sequence>
-		<xs:attribute name="SupportUrl" type="xs:string" />
+		<xs:attribute use="required" name="SupportUrl" type="xs:string" />
 	</xs:complexType>
 	<xs:simpleType name="NetClrVersion">
 		<xs:restriction base="xs:string">

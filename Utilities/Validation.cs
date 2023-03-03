@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace XLAutoDeploy.Manifests.Utilities
 {
     public static class Validation
     {
+        public static HashSet<string> ProcessorArchitectureValues = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "MSIL",
+            "X86",
+            "IA64"
+        };
+
         public static void ValidateDeploymentAndAddIn(Deployment deployment, AddIn addIn)
         {
             ValidateDeployment(deployment);
@@ -142,6 +150,13 @@ namespace XLAutoDeploy.Manifests.Utilities
                     $"The {nameof(Description.Manufacturer)} is either null, empty, or whitespace.",
                     $"Supply a valid value for {nameof(Description.Manufacturer)}."));
             }
+
+            if (String.IsNullOrEmpty(description.Product) || String.IsNullOrWhiteSpace(description.Product))
+            {
+                throw new InvalidDeploymentException(Errors.GetFormatedErrorMessage(errorContext,
+                    $"The {nameof(Description.Product)} is either null, empty, or whitespace.",
+                    $"Supply a valid value for {nameof(Description.Product)}."));
+            }
         }
 
         public static void ValidateDeploymentSettings(DeploymentSettings deploymentSettings)
@@ -177,7 +192,6 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
 
             ValidateLoadBehavior(deploymentSettings.LoadBehavior);
-
             ValidateUpdateBehavior(deploymentSettings.UpdateBehavior);
         }
 
@@ -303,6 +317,15 @@ namespace XLAutoDeploy.Manifests.Utilities
                     $"Supply a valid {nameof(RequiredOperatingSystem)} instance."));
             }
 
+            if (String.IsNullOrEmpty(requiredOperatingSystem.SupportUrl) || String.IsNullOrWhiteSpace(requiredOperatingSystem.SupportUrl))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
+                    $"The {nameof(RequiredOperatingSystem.SupportUrl)} is either null, empty, or whitespace.",
+                    $"Supply a valid value for {nameof(RequiredOperatingSystem.SupportUrl)}."));
+            }
+
+            ValidateUrl(requiredOperatingSystem.SupportUrl); 
+
             if (requiredOperatingSystem.Version == null)
             {
                 throw new InvalidDeploymentException(Errors.GetFormatedErrorMessage(errorContext,
@@ -350,6 +373,8 @@ namespace XLAutoDeploy.Manifests.Utilities
                     $"The {nameof(CompatibleFramework.SupportUrl)} is either null, empty, or whitespace.",
                     $"Supply a valid value for {nameof(CompatibleFramework.SupportUrl)}."));
             }
+
+            ValidateUrl(compatibleFramework.SupportUrl);
 
             if (compatibleFramework?.SupportedRuntime == null)
             {
@@ -495,7 +520,7 @@ namespace XLAutoDeploy.Manifests.Utilities
                     $"Supply a valid value for {nameof(Dependency.Type)}."));
             }
 
-            if (dependency?.Size == null || dependency?.Size == 0)
+            if (dependency?.Size == null || dependency.Size == 0)
             {
                 throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
                     $"The {nameof(Dependency.Size)} cannot be null or 0.",
@@ -550,6 +575,20 @@ namespace XLAutoDeploy.Manifests.Utilities
                 throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
                     $"The {nameof(AssemblyIdentity.Version)} cannot be null.",
                     $"Supply a valid {nameof(AssemblyIdentity.Version)}."));
+            }
+
+            if (String.IsNullOrEmpty(assemblyId.ProcessorArchitecture) || String.IsNullOrWhiteSpace(assemblyId.ProcessorArchitecture))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
+                    $"The {nameof(AssemblyIdentity.ProcessorArchitecture)} is either null, empty, or whitespace.",
+                    $"Supply a valid value for {nameof(AssemblyIdentity.ProcessorArchitecture)}."));
+            }
+
+            if (!ProcessorArchitectureValues.Contains(assemblyId.ProcessorArchitecture))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage(errorContext,
+    $"The {nameof(AssemblyIdentity.ProcessorArchitecture)} value {assemblyId.ProcessorArchitecture} is not defined.",
+    $"Supply a valid value from the following list for {nameof(AssemblyIdentity.ProcessorArchitecture)}: {String.Join(",", ProcessorArchitectureValues)}."));
             }
         }
 
@@ -654,5 +693,34 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
         }
         #endregion
+
+        public static void ValidateUrl(string url)
+        {
+            if (String.IsNullOrEmpty(url) || String.IsNullOrWhiteSpace(url))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(url)}",
+                    $"The {nameof(url)} is either null, empty, or whitespace.",
+                    $"Supply a valid value for {nameof(url)}."));
+            }
+            string tempUrl = url;
+            if (!Regex.IsMatch(url, @"^https?:\/\/", RegexOptions.IgnoreCase))
+            {
+                tempUrl = "http://" + url;
+            }
+
+            if (!Uri.TryCreate(tempUrl, UriKind.Absolute, out Uri uri))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(url)}",
+                    $"The {nameof(url)} is not a valid URI.",
+                    $"Supply a valid value for {nameof(url)}."));
+            }
+
+            if (!((uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps) && tempUrl.Contains('.')))
+            {
+                throw new InvalidAddInException(Errors.GetFormatedErrorMessage($"Attempting to validate a {nameof(url)}",
+                    $"The {nameof(url)} is not a valid URI.",
+                    $"Supply a valid value for {nameof(url)}."));
+            }
+        }
     }
 }

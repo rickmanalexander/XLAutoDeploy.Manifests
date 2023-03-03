@@ -76,7 +76,7 @@ namespace XLAutoDeploy.Manifests
         /// <see href="https://docs.microsoft.com/en-us/dotnet/api/system.reflection.processorarchitecture?view=netframework-4.8"/> 
         /// for more information.<br/> <br/>
         /// Xml Node Type: Attribute <br/>
-        /// Xml Required: N
+        /// Xml Required: Y
         /// </remarks> 
         [XmlAttribute]
         public string ProcessorArchitecture { get; set; }

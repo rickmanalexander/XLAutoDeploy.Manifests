@@ -102,7 +102,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Array <br/>
         /// Xml Required: N <br/>
         /// </remarks> 
-        [XmlArray("Dependencies", IsNullable = true), XmlArrayItem(typeof(Dependency), ElementName = "Dependency", IsNullable = false)]
+        [XmlArray("Dependencies", IsNullable = false), XmlArrayItem(typeof(Dependency), ElementName = "Dependency", IsNullable = false)]
         public List<Dependency> Dependencies { get; set; }
 
         /// <summary>
