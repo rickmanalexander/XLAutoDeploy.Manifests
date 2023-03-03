@@ -13,5 +13,10 @@ namespace XLAutoDeploy.Manifests.Utilities
         {
             return String.Format(Constants.DeploymentManifestParameterizedFileName, addInName);
         }
+
+        public static string UpdateQueryInfoManifestFileName(string addInName)
+        {
+            return String.Format(Constants.UpdateQueryInfoParameterizedFileName, addInName);
+        }
     }
 }
