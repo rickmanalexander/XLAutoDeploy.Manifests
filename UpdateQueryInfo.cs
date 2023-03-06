@@ -9,7 +9,7 @@ namespace XLAutoDeploy.Manifests
     /// </summary>  
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/UpdateQueryInfo.xsd", IsNullable = false)]
+    [XmlRoot(IsNullable = false)]
     public sealed class UpdateQueryInfo
     {
         public UpdateQueryInfo() { }
