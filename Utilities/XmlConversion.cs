@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace XLAutoDeploy.Manifests.Utilities
@@ -20,49 +21,53 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
         }
 
-        public static T DeserializeFromXml<T>(WebClient webClient, string url, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static T DeserializeFromXml<T>(WebClient webClient, string url)
         {
             using (var stream = webClient.OpenRead(url))
             {
-                return DeserializeFromXml<T>(stream, readerConformanceLevel);
+                return DeserializeFromXml<T>(stream);
             }
         }
 
-        public static async Task<T> DeserializeFromXmlAsync<T>(WebClient webClient, string url, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static async Task<T> DeserializeFromXmlAsync<T>(WebClient webClient, string url)
         {
             using (var stream = await webClient.OpenReadTaskAsync(url))
             {
-                return DeserializeFromXml<T>(stream, readerConformanceLevel);
+                return DeserializeFromXml<T>(stream);
             }
         }
-        public static T DeserializeFromXml<T>(WebClient webClient, Uri uri, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static T DeserializeFromXml<T>(WebClient webClient, Uri uri)
         {
             using (var stream = webClient.OpenRead(uri))
             {
-                return DeserializeFromXml<T>(stream, readerConformanceLevel);
+                return DeserializeFromXml<T>(stream);
             }
         }
 
-        public static async Task<T> DeserializeFromXmlAsync<T>(WebClient webClient, Uri uri, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static async Task<T> DeserializeFromXmlAsync<T>(WebClient webClient, Uri uri)
         {
             using (var stream = await webClient.OpenReadTaskAsync(uri))
             {
-                return DeserializeFromXml<T>(stream, readerConformanceLevel);
+                return DeserializeFromXml<T>(stream);
             }
         }
 
-        public static T DeserializeFromXml<T>(string filePath, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static T DeserializeFromXml<T>(string filePath)
         {
             using (var stream = File.OpenRead(filePath))
             {
-                return DeserializeFromXml<T>(stream, readerConformanceLevel); 
+                return DeserializeFromXml<T>(stream); 
             }
         }
 
-        public static T DeserializeFromXml<T>(Stream stream, System.Xml.ConformanceLevel readerConformanceLevel = ConformanceLevel.Document)
+        public static T DeserializeFromXml<T>(Stream stream)
         {
             //ConformanceLevel.Fragment not require T to have a root namespace
-            var settings = new XmlReaderSettings() { ConformanceLevel = readerConformanceLevel };
+            var settings = new XmlReaderSettings();
+            settings.ValidationType = ValidationType.Schema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessInlineSchema;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation;
+            settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
 
             var serializer = new XmlSerializer(typeof(T));
 

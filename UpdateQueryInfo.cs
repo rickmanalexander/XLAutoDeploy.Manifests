@@ -8,6 +8,8 @@ namespace XLAutoDeploy.Manifests
     /// Represents information regarding an update coming from a remote <see cref="FileHost"/>.
     /// </summary>  
     [Serializable]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/UpdateQueryInfo.xsd", IsNullable = false)]
     public sealed class UpdateQueryInfo
     {
         public UpdateQueryInfo() { }
@@ -87,7 +89,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: Y 
         /// </remarks>  
-        [XmlElement("LastChecked", typeof(DateTime), IsNullable = true)]
+        [XmlElement("LastChecked", typeof(DateTime?), IsNullable = true)]
         public DateTime? LastChecked { get; set; }
 
         /// <summary>

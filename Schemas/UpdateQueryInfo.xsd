@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="https://github.com/XLAutoDeploy.Manifests/Schemas/UpdateQueryInfo.xsd" elementFormDefault="qualified" targetNamespace="https://github.com/XLAutoDeploy.Manifests/Schemas/UpdateQueryInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="UpdateQueryInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="LastChecked" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="1" maxOccurs="1" name="FirstNotified" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="1" maxOccurs="1" name="LastNotified" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
