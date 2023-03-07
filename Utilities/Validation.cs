@@ -329,11 +329,11 @@ namespace XLAutoDeploy.Manifests.Utilities
 
             ValidateUrl(requiredOperatingSystem.SupportUrl); 
 
-            if (requiredOperatingSystem.Version == null)
+            if (requiredOperatingSystem.MinimumVersion == null)
             {
                 throw new InvalidDeploymentException(Errors.GetFormatedErrorMessage(errorContext,
-                    $"The {nameof(RequiredOperatingSystem.Version)} is null.",
-                    $"Supply a valid value for {nameof(RequiredOperatingSystem.Version)}."));
+                    $"The {nameof(RequiredOperatingSystem.MinimumVersion)} is null.",
+                    $"Supply a valid value for {nameof(RequiredOperatingSystem.MinimumVersion)}."));
             }
 
             if (requiredOperatingSystem?.Bitness == null)

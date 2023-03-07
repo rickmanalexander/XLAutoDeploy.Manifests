@@ -28,7 +28,7 @@
 	</xs:simpleType>
 	<xs:complexType name="Description">
 		<xs:sequence>
-			<xs:element minOccurs="1" maxOccurs="1" name="SupportUri" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="1" name="SupportUri" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute use="required" name="Publisher" type="xs:string" />
 		<xs:attribute use="required" name="Manufacturer" type="xs:string" />
@@ -90,7 +90,7 @@
 			<xs:element minOccurs="1" maxOccurs="1" name="Bitness" type="tns:OperatingSystemBitness" />
 		</xs:sequence>
 		<xs:attribute use="required" name="SupportUrl" type="xs:string" />
-		<xs:attribute use="required" name="Version" type="xs:string" />
+		<xs:attribute use="required" name="MinimumVersion" type="xs:string" />
 	</xs:complexType>
 	<xs:simpleType name="OperatingSystemBitness">
 		<xs:restriction base="xs:string">

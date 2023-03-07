@@ -52,20 +52,20 @@ namespace XLAutoDeploy.Manifests
         /// </remarks> 
         //using "shim" property b/c System.Version is not serializable
         [XmlIgnore]
-        public System.Version Version { get; set; }
+        public System.Version MinimumVersion { get; set; }
 
-        [XmlAttribute("Version")]
+        [XmlAttribute("MinimumVersion")]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
-        public string VersionString
+        public string MinimumVersionString
         {
             get
             {
-                return Version?.ToString() ?? String.Empty;
+                return MinimumVersion?.ToString() ?? String.Empty;
             }
             set
             {
                 if (!String.IsNullOrEmpty(value))
-                    Version = new Version(value);
+                    MinimumVersion = new Version(value);
             }
         }
 
