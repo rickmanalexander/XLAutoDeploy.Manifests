@@ -4,7 +4,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element minOccurs="1" maxOccurs="1" name="AddInUri" type="xs:string" />
-				<xs:element minOccurs="1" maxOccurs="1" name="AlternateAddInUri" type="xs:string" />
 				<xs:element minOccurs="1" maxOccurs="1" name="TargetOfficeInstallation" type="tns:MicrosoftOfficeBitness" />
 				<xs:element minOccurs="1" maxOccurs="1" name="Description" type="tns:Description" />
 				<xs:element minOccurs="1" maxOccurs="1" name="Settings" type="tns:DeploymentSettings" />
