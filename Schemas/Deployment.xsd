@@ -5,6 +5,7 @@
 			<xs:sequence>
 				<xs:element minOccurs="1" maxOccurs="1" name="AddInUri" type="xs:string" />
 				<xs:element minOccurs="1" maxOccurs="1" name="AlternateAddInUri" type="xs:string" />
+				<xs:element minOccurs="1" maxOccurs="1" name="TargetOfficeInstallation" type="tns:MicrosoftOfficeBitness" />
 				<xs:element minOccurs="1" maxOccurs="1" name="Description" type="tns:Description" />
 				<xs:element minOccurs="1" maxOccurs="1" name="Settings" type="tns:DeploymentSettings" />
 				<xs:element minOccurs="1" maxOccurs="1" name="RequiredOperatingSystem" type="tns:RequiredOperatingSystem" />
@@ -20,6 +21,12 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:simpleType name="MicrosoftOfficeBitness">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="x32" />
+			<xs:enumeration value="x64" />
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="Description">
 		<xs:sequence>
 			<xs:element minOccurs="1" maxOccurs="1" name="SupportUri" type="xs:string" />
