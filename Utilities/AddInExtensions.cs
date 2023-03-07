@@ -16,13 +16,13 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 foreach (var dependency in addIn.Dependencies)
                 {
-                    dependency.Uri = new Uri(dependency.Uri.AsString() + fullExtension);
+                    dependency.Uri = new Uri(dependency.Uri.AbsoluteUri + fullExtension);
 
                     if (dependency?.AssetFiles?.Any() == true)
                     {
                         foreach (var file in dependency.AssetFiles)
                         {
-                            file.Uri = new Uri(file.Uri.AsString() + fullExtension);
+                            file.Uri = new Uri(file.Uri.AbsoluteUri + fullExtension);
                         }
                     }
                 }
@@ -32,7 +32,7 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 foreach (var file in addIn.AssetFiles)
                 {
-                    file.Uri = new Uri(file.Uri.AsString() + fullExtension);
+                    file.Uri = new Uri(file.Uri.AbsoluteUri + fullExtension);
                 }
             }
         }
@@ -46,18 +46,18 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 foreach (var dependency in addIn.Dependencies)
                 {
-                    if (Path.GetExtension(dependency.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                    if (Path.GetExtension(dependency.Uri.AbsoluteUri).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                     {
-                        dependency.Uri = new Uri(dependency.Uri.AsString().TrimEnd(extensionChars));
+                        dependency.Uri = new Uri(dependency.Uri.AbsoluteUri.TrimEnd(extensionChars));
                     }
 
                     if (dependency?.AssetFiles?.Any() == true)
                     {
                         foreach (var file in dependency.AssetFiles)
                         {
-                            if (Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                            if (Path.GetExtension(file.Uri.AbsoluteUri).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                             {
-                                file.Uri = new Uri(file.Uri.AsString().TrimEnd(extensionChars));
+                                file.Uri = new Uri(file.Uri.AbsoluteUri.TrimEnd(extensionChars));
                             }
                         }
                     }
@@ -68,9 +68,9 @@ namespace XLAutoDeploy.Manifests.Utilities
             {
                 foreach (var file in addIn.AssetFiles)
                 {
-                    if (Path.GetExtension(file.Uri.AsString()).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
+                    if (Path.GetExtension(file.Uri.AbsoluteUri).Equals(Constants.XLAutoDeployFileExtention, StringComparison.OrdinalIgnoreCase))
                     {
-                        file.Uri = new Uri(file.Uri.AsString().TrimEnd(extensionChars));
+                        file.Uri = new Uri(file.Uri.AbsoluteUri.TrimEnd(extensionChars));
                     }
                 }
             }

@@ -1,6 +1,4 @@
-﻿using XLAutoDeploy.Manifests.Utilities;
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -34,7 +32,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return DeploymentRegistryUri?.AsString();
+                return DeploymentRegistryUri?.AbsoluteUri;
             }
             set
             {

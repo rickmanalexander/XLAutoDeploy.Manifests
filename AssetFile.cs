@@ -3,8 +3,6 @@ using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
 
-using XLAutoDeploy.Manifests.Utilities;
-
 namespace XLAutoDeploy.Manifests
 {
     /// <summary>
@@ -32,7 +30,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return Uri?.AsString();
+                return Uri?.AbsoluteUri;
             }
             set
             {

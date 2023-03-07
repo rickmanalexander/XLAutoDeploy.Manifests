@@ -5,8 +5,6 @@ using System.Security.Cryptography.Xml;
 using System.Xml;
 using System.Xml.Serialization;
 
-using XLAutoDeploy.Manifests.Utilities;
-
 namespace XLAutoDeploy.Manifests
 {
     /// <summary>
@@ -44,7 +42,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return AddInUri?.AsString();
+                return AddInUri?.AbsoluteUri;
             }
             set
             {

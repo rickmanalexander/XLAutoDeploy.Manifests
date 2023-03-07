@@ -1,6 +1,4 @@
-﻿using XLAutoDeploy.Manifests.Utilities;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.Xml;
@@ -45,7 +43,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return Uri?.AsString();
+                return Uri?.AbsoluteUri;
             }
             set
             {
@@ -72,7 +70,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return DeploymentUri?.AsString();
+                return DeploymentUri?.AbsoluteUri;
             }
             set
             {

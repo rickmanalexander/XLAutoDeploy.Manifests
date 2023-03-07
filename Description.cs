@@ -1,6 +1,4 @@
-﻿using XLAutoDeploy.Manifests.Utilities;
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Xml;
 using System.Xml.Serialization;
@@ -63,7 +61,7 @@ namespace XLAutoDeploy.Manifests
         {
             get
             {
-                return SupportUri?.AsString();
+                return SupportUri?.AbsoluteUri;
             }
             set
             {
