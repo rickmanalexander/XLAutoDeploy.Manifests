@@ -110,6 +110,7 @@
 			<xs:element minOccurs="1" maxOccurs="1" name="TargetVersion" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute use="required" name="SupportUrl" type="xs:string" />
+		<xs:attribute use="required" name="Required" type="xs:boolean" />
 	</xs:complexType>
 	<xs:simpleType name="NetClrVersion">
 		<xs:restriction base="xs:string">

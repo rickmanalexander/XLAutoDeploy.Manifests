@@ -24,6 +24,16 @@ namespace XLAutoDeploy.Manifests
         public string SupportUrl { get; set; }
 
         /// <summary>
+        /// Specifies if this framework is required for the application to run.
+        /// </summary>  
+        /// <remarks>
+        /// Xml Node Type: Attribute <br/>
+        /// Xml Required: Y <br/>
+        /// </remarks> 
+        [XmlAttribute]
+        public bool Required { get; set; }
+
+        /// <summary>
         /// Specifies CLR version required to run the application.
         /// </summary>  
         /// <remarks>
