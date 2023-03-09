@@ -21,6 +21,24 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
         }
 
+        // Opening a single read/write stream appends to the existing data, effectivly duplicating it, so we open 2 separate ones
+        public static void AddSchemaLocationToXmlFile(string filePath, Uri schemaLocation)
+        {
+            XmlDocument doc = new XmlDocument();
+            using (var readStream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+            {
+                doc.Load(readStream);
+            }
+
+            var rootNode = doc.DocumentElement;
+            rootNode.SetAttribute("schemaLocation", "http://www.w3.org/2001/XMLSchema-instance", rootNode.NamespaceURI + " " + schemaLocation.AbsoluteUri);
+
+            using (var writeStream = File.Open(filePath, FileMode.Open, FileAccess.Write))
+            {
+                doc.Save(writeStream);
+            }
+        }
+
         public static T DeserializeFromXml<T>(WebClient webClient, string url, bool validateAgainstSchema = true)
         {
             using (var stream = webClient.OpenRead(url))
