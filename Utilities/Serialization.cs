@@ -39,6 +39,21 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
         }
 
+        public static string GetSchemaLocationFromXmlFile(string filePath)
+        {
+            using (var stream = File.OpenRead(filePath))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(stream);
+
+                var rootNode = doc.DocumentElement;
+
+                var schemaLocationAttribute = rootNode.SelectSingleNode("//@*[local-name()='schemaLocation']");
+
+                return schemaLocationAttribute?.Value;
+            }
+        }
+
         public static T DeserializeFromXml<T>(WebClient webClient, string url, bool validateAgainstSchema = true)
         {
             using (var stream = webClient.OpenRead(url))
@@ -54,6 +69,7 @@ namespace XLAutoDeploy.Manifests.Utilities
                 return DeserializeFromXml<T>(stream, validateAgainstSchema);
             }
         }
+
         public static T DeserializeFromXml<T>(WebClient webClient, Uri uri, bool validateAgainstSchema = true)
         {
             using (var stream = webClient.OpenRead(uri))
