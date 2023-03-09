@@ -54,19 +54,33 @@ namespace XLAutoDeploy.Manifests.Utilities
             }
         }
 
-        public static T DeserializeFromXml<T>(WebClient webClient, string url, bool validateAgainstSchema = true)
+        public static string GetSchemaLocationFromXmlFile(WebClient webClient, Uri uri)
         {
-            using (var stream = webClient.OpenRead(url))
+            using (var stream = webClient.OpenRead(uri))
             {
-                return DeserializeFromXml<T>(stream, validateAgainstSchema);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(stream);
+
+                var rootNode = doc.DocumentElement;
+
+                var schemaLocationAttribute = rootNode.SelectSingleNode("//@*[local-name()='schemaLocation']");
+
+                return schemaLocationAttribute?.Value;
             }
         }
 
-        public static async Task<T> DeserializeFromXmlAsync<T>(WebClient webClient, string url, bool validateAgainstSchema = true)
+        public static async Task<string> GetSchemaLocationFromXmlFileAsync(WebClient webClient, Uri uri)
         {
-            using (var stream = await webClient.OpenReadTaskAsync(url))
+            using (var stream = await webClient.OpenReadTaskAsync(uri))
             {
-                return DeserializeFromXml<T>(stream, validateAgainstSchema);
+                XmlDocument doc = new XmlDocument();
+                doc.Load(stream);
+
+                var rootNode = doc.DocumentElement;
+
+                var schemaLocationAttribute = rootNode.SelectSingleNode("//@*[local-name()='schemaLocation']");
+
+                return schemaLocationAttribute?.Value;
             }
         }
 
