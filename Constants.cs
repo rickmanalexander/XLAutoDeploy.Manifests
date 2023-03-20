@@ -40,10 +40,12 @@ namespace XLAutoDeploy.Manifests
     [Serializable]
     public enum MicrosoftOfficeBitness
     {
-        [XmlEnum("x32")]
-        X32 = 32,
-        [XmlEnum("x64")]
-        X64 = 64
+        [XmlEnum("unknown")]
+        Unknown = 0,
+        [XmlEnum("32bit")]
+        Bit32 = 32,
+        [XmlEnum("64bit")]
+        Bit64 = 64
     }
 
     /// <summary>
