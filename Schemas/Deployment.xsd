@@ -22,8 +22,9 @@
 	</xs:element>
 	<xs:simpleType name="MicrosoftOfficeBitness">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="x32" />
-			<xs:enumeration value="x64" />
+            <xs:enumeration value="unknown" />
+			<xs:enumeration value="32bit" />
+			<xs:enumeration value="64bit" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="Description">
