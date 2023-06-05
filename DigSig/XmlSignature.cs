@@ -5,10 +5,11 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
-using System.Xml; 
+using System.Xml;
 
 namespace XLAutoDeploy.Manifests.DigSig
 {
+    // See: https://github.com/scottbrady91/samples/tree/master/XmlSigning
     public static class XmlSignature
     {
         private const string AlgorithmUri = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256";
@@ -101,7 +102,7 @@ namespace XLAutoDeploy.Manifests.DigSig
 
         private static bool ValidateXmlDocumentSignature(XmlDocument xmlDoc, X509Certificate2 certificate)
         {
-            ValidateForSignatureElement(xmlDoc); 
+            ValidateForSignatureElement(xmlDoc);
 
             var signiture = xmlDoc.GetElementsByTagName("Signature")[0];
 
@@ -112,7 +113,7 @@ namespace XLAutoDeploy.Manifests.DigSig
         {
             var signedXml = new SignedXml(xml);
 
-            ValidateForSignatureElement(xml.OwnerDocument); 
+            ValidateForSignatureElement(xml.OwnerDocument);
 
             return signedXml.CheckSignature((AsymmetricAlgorithm)certificate.GetRSAPublicKey() ?? certificate.GetECDsaPublicKey());
         }
@@ -147,24 +148,42 @@ namespace XLAutoDeploy.Manifests.DigSig
             return new X509Certificate2(data);
         }
 
-        // public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, int // daysAfterCurrent)
-        // {
-        //     // ECDSA using P-256 and SHA-256
-        //     return CreateSelfSignedCertificate(subjectName, DateTimeOffset.UtcNow, // daysAfterCurrent);
-        // }
-        // 
-        // public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, // DateTimeOffset baseDate, int daysAfter)
-        // {
-        //     return CreateSelfSignedCertificate(subjectName, baseDate, baseDate.AddDays// (daysAfter));
-        // }
-        // 
-        // public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, // DateTimeOffset notBefore, DateTimeOffset notAfter)
-        // {
-        //     // ECDSA using P-256 and SHA-256
-        //     var ecdsa = ECDsa.Create(ECCurve.NamedCurves.nistP256);
-        //     return new CertificateRequest(@"CN=" + subjectName.Replace("CN=",  String.Empty), //ecdsa, HashAlgorithmName.SHA256)
-        //         .CreateSelfSigned(notBefore, notAfter);
-        // }
+        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, int daysAfterCurrent)
+        {
+            // ECDSA using P-256 and SHA-256
+            return CreateSelfSignedCertificate(subjectName, DateTimeOffset.UtcNow, daysAfterCurrent);
+        }
+
+        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, DateTimeOffset baseDate, int daysAfter)
+        {
+            return CreateSelfSignedCertificate(subjectName, baseDate, baseDate.AddDays(daysAfter));
+        }
+
+        // See: https://stackoverflow.com/a/57735200/9743237
+        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, DateTimeOffset notBefore, DateTimeOffset notAfter)
+        {
+            // ECDSA using P-256 and SHA-256
+            var ecdsa = ECDsa.Create(ECCurve.NamedCurves.nistP256);
+
+            // W/O reflection
+            //                 return new CertificateRequest(@"CN=" + subjectName.Replace("CN=", String.Empty), ecdsa, HashAlgorithmName.SHA256)
+            //    .CreateSelfSigned(notBefore, notAfter);
+            
+            // uing reflection, b/c .NET Standard 2.0 doesn't contain the
+            // 'CertificateRequest' type
+            var certificateRequestType =
+    Type.GetType("System.Security.Cryptography.X509Certificates.CertificateRequest");
+
+            object request = certificateRequestType
+                .GetConstructor(
+    new[] { typeof(string), typeof(ECDsa), typeof(HashAlgorithmName)})
+                .Invoke(
+    new object[] { @"CN=" + subjectName.Replace("CN=", String.Empty), ecdsa, HashAlgorithmName.SHA256});
+
+            return (X509Certificate2)certificateRequestType
+                .GetMethod("CreateSelfSigned")
+                .Invoke(request, new object[] { notBefore, notAfter });
+        }
 
         public static void RemoveExistingSignatureNodes(XmlDocument xmlDoc)
         {
@@ -189,7 +208,7 @@ namespace XLAutoDeploy.Manifests.DigSig
             }
             catch
             {
-                sinatureElement = null; 
+                sinatureElement = null;
                 return false;
             }
         }
@@ -202,7 +221,7 @@ namespace XLAutoDeploy.Manifests.DigSig
             }
             catch
             {
-                return false; 
+                return false;
             }
         }
     }
