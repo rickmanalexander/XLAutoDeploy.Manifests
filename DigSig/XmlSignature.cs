@@ -12,13 +12,7 @@ namespace XLAutoDeploy.Manifests.DigSig
     // See: https://github.com/scottbrady91/samples/tree/master/XmlSigning
     public static class XmlSignature
     {
-        private const string AlgorithmUri = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256";
-
-        static XmlSignature()
-        {
-            // register custom algorithm
-            CryptoConfig.AddAlgorithm(typeof(Ecdsa256SignatureDescription), AlgorithmUri);
-        }
+        public const string AlgorithmUri = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256";
 
         public static void SignXmlDocument(string filePath, X509Certificate2 certificate, bool embedSigniture)
         {
@@ -49,10 +43,10 @@ namespace XLAutoDeploy.Manifests.DigSig
             xmlDoc.DocumentElement?.AppendChild(signedXml);
         }
 
-        public static XmlElement SignXml(XmlElement xml, X509Certificate2 cert, string signatureMethod, bool embedSigniture)
+        private static XmlElement SignXml(XmlElement xml, X509Certificate2 cert, string signatureMethod, bool embedSigniture)
         {
             // X509Certificate2.PrivateKey is being deprecated
-            var key = (AsymmetricAlgorithm)cert.GetRSAPrivateKey() ?? cert.GetECDsaPrivateKey();
+            var key = (AsymmetricAlgorithm)cert.GetRSAPrivateKey();
 
             // set key, signing algorithm, and canonicalization method
             var signedXml = new SignedXml(xml) { SigningKey = key };
@@ -82,7 +76,6 @@ namespace XLAutoDeploy.Manifests.DigSig
             // get signature XML element
             return signedXml.GetXml();
         }
-
 
         public static bool ValidateXmlDocumentSignature(string filePath, X509Certificate2 certificate)
         {
@@ -162,13 +155,8 @@ namespace XLAutoDeploy.Manifests.DigSig
         // See: https://stackoverflow.com/a/57735200/9743237
         public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, DateTimeOffset notBefore, DateTimeOffset notAfter)
         {
-            // ECDSA using P-256 and SHA-256
-            var ecdsa = ECDsa.Create(ECCurve.NamedCurves.nistP256);
+            var rsa = RSA.Create();
 
-            // W/O reflection
-            //                 return new CertificateRequest(@"CN=" + subjectName.Replace("CN=", String.Empty), ecdsa, HashAlgorithmName.SHA256)
-            //    .CreateSelfSigned(notBefore, notAfter);
-            
             // uing reflection, b/c .NET Standard 2.0 doesn't contain the
             // 'CertificateRequest' type
             var certificateRequestType =
@@ -176,9 +164,9 @@ namespace XLAutoDeploy.Manifests.DigSig
 
             object request = certificateRequestType
                 .GetConstructor(
-    new[] { typeof(string), typeof(ECDsa), typeof(HashAlgorithmName)})
+    new[] { typeof(string), typeof(ECDsa), typeof(HashAlgorithmName), typeof(RSASignaturePadding)})
                 .Invoke(
-    new object[] { @"CN=" + subjectName.Replace("CN=", String.Empty), ecdsa, HashAlgorithmName.SHA256});
+    new object[] { @"CN=" + subjectName.Replace("CN=", String.Empty), rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1 });
 
             return (X509Certificate2)certificateRequestType
                 .GetMethod("CreateSelfSigned")
