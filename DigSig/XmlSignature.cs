@@ -164,7 +164,7 @@ namespace XLAutoDeploy.Manifests.DigSig
 
             object request = certificateRequestType
                 .GetConstructor(
-    new[] { typeof(string), typeof(ECDsa), typeof(HashAlgorithmName), typeof(RSASignaturePadding)})
+    new[] { typeof(string), typeof(RSA), typeof(HashAlgorithmName), typeof(RSASignaturePadding)})
                 .Invoke(
     new object[] { @"CN=" + subjectName.Replace("CN=", String.Empty), rsa, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1 });
 
