@@ -2,7 +2,7 @@
 
 namespace XLAutoDeploy.Manifests.DigSig
 {
-    internal sealed class EcdsaSignatureDeformatter : AsymmetricSignatureDeformatter
+    public sealed class EcdsaSignatureDeformatter : AsymmetricSignatureDeformatter
     {
         private ECDsa _key;
 

@@ -2,7 +2,7 @@
 
 namespace XLAutoDeploy.Manifests.DigSig
 {
-    internal sealed class Ecdsa256SignatureDescription : SignatureDescription
+    public sealed class Ecdsa256SignatureDescription : SignatureDescription
     {
         public const int RequiredKeySize = 256; 
         public Ecdsa256SignatureDescription()
