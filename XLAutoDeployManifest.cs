@@ -15,6 +15,28 @@ namespace XLAutoDeploy.Manifests
         public XLAutoDeployManifest() { }
 
         /// <summary>
+        /// Specifies the version number of XLAutoDeploy.
+        /// </summary>  
+        //using "shim" property b/c System.Version is not serializable
+        [XmlIgnore]
+        public System.Version Version { get; set; }
+
+        [XmlElement("Version", typeof(string), IsNullable = false)]
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+        public string VersionString
+        {
+            get
+            {
+                return Version?.ToString() ?? String.Empty;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    Version = new Version(value);
+            }
+        }
+
+        /// <summary>
         /// Specifies the Uri of the associated <see cref="DeploymentRegistry"/>.
         /// </summary>  
         /// <remarks>

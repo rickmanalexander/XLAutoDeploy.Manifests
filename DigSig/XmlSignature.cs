@@ -141,26 +141,23 @@ namespace XLAutoDeploy.Manifests.DigSig
             return new X509Certificate2(data);
         }
 
-        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, int daysAfterCurrent)
+        public static X509Certificate2 CreateSelfSignedCertificate(Type certificateRequestType, string subjectName, int daysAfterCurrent)
         {
             // ECDSA using P-256 and SHA-256
-            return CreateSelfSignedCertificate(subjectName, DateTimeOffset.UtcNow, daysAfterCurrent);
+            return CreateSelfSignedCertificate(certificateRequestType, subjectName, DateTimeOffset.UtcNow, daysAfterCurrent);
         }
 
-        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, DateTimeOffset baseDate, int daysAfter)
+        public static X509Certificate2 CreateSelfSignedCertificate(Type certificateRequestType, string subjectName, DateTimeOffset baseDate, int daysAfter)
         {
-            return CreateSelfSignedCertificate(subjectName, baseDate, baseDate.AddDays(daysAfter));
+            return CreateSelfSignedCertificate(certificateRequestType, subjectName, baseDate, baseDate.AddDays(daysAfter));
         }
 
         // See: https://stackoverflow.com/a/57735200/9743237
-        public static X509Certificate2 CreateSelfSignedCertificate(string subjectName, DateTimeOffset notBefore, DateTimeOffset notAfter)
+        // uing reflection, b/c .NET Standard 2.0 doesn't contain the
+        // 'certificateRequestType' type
+        public static X509Certificate2 CreateSelfSignedCertificate(Type certificateRequestType,  string subjectName, DateTimeOffset notBefore, DateTimeOffset notAfter)
         {
             var rsa = RSA.Create();
-
-            // uing reflection, b/c .NET Standard 2.0 doesn't contain the
-            // 'CertificateRequest' type
-            var certificateRequestType =
-    Type.GetType("System.Security.Cryptography.X509Certificates.CertificateRequest");
 
             object request = certificateRequestType
                 .GetConstructor(

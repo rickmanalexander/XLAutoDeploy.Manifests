@@ -19,9 +19,11 @@ namespace XLAutoDeploy.Manifests
         /// If <see cref="UpdateMode.Forced"/> then the update will be processed regardless if 
         /// the <see cref="AddInIdentity.Version"/> (of the <see cref="AddIn"/>) was incremented 
         /// or not. When <see cref="UpdateBehavior.NotifyClient"/> is set to true updates will 
-        /// display a non-cancellable  dialog to the client that notifies them of a pending 
-        /// update. If <see cref="UpdateMode.Normal"/>, then, updates can be deferred until a 
-        /// later time. <br/> <br/>
+        /// display a dialog to the client that notifies them of a pending 
+        /// update. If the client deferrs the update, then the add-in will not be loaded.  
+        /// If <see cref="UpdateMode.Normal"/>, then, the dialog will only be displayed to 
+        /// the client if the the <see cref="AddInIdentity.Version"/> (of the <see cref="AddIn"/>) 
+        /// was incremented . <br/> <br/>
         /// Xml Node Type: Element <br/>
         /// Xml Required: Y 
         /// </remarks>
@@ -60,8 +62,9 @@ namespace XLAutoDeploy.Manifests
         /// Specifies whether or not update notifications should be displayed to the client. 
         /// </summary>
         /// <remarks>
-        /// If <see cref="P:RequiresRestart"/> is set to true, then this property will 
-        /// be ignored and the client will be notified regardless. <br/> <br/>
+        /// If <see cref="UpdateBehavior.RequiresRestart"/> is set to true, or if 
+        /// <see cref="UpdateBehavior.Mode"/> == <see cref="UpdateMode.Forced"/> then this 
+        /// property will be ignored and the client will be notified regardless. <br/> <br/>
         /// Xml Node Type: Element <br/>
         /// Xml Required: Y 
         /// </remarks>
