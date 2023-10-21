@@ -72,25 +72,10 @@ namespace XLAutoDeploy.Manifests
         public bool NotifyClient { get; set; }
 
         /// <summary>
-        /// Specifies whether the updates are pushed to the client machine in realtime.  
-        /// </summary>
-        /// <remarks>
-        /// When set to true, updates will be pushed to the client as they occur on the remote 
-        /// host. This only applies to remote hosts of type <see cref="FileHost.HostType"/> 
-        /// equal to <see cref="FileHostType.FileServer"/>  <br/> <br/>
-        /// Xml Node Type: Element <br/>
-        /// Xml Required: Y 
-        /// </remarks>
-        [XmlElement(IsNullable = false)]
-        public bool DoInRealTime { get; set; }
-
-        /// <summary>
         /// Represents how old the current update can become before the application will perform 
         /// the next update check. 
         /// </summary> 
         /// <remarks>
-        /// If <see cref="UpdateBehavior.DoInRealTime"/> is set to true, then the value of this 
-        /// property will be ignored. 
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks>

@@ -369,6 +369,15 @@
             Xml Required: Y <br/>
             </remarks> 
         </member>
+        <member name="P:XLAutoDeploy.Manifests.CompatibleFramework.Required">
+            <summary>
+            Specifies if this framework is required for the application to run.
+            </summary>  
+            <remarks>
+            Xml Node Type: Attribute <br/>
+            Xml Required: Y <br/>
+            </remarks> 
+        </member>
         <member name="P:XLAutoDeploy.Manifests.CompatibleFramework.SupportedRuntime">
             <summary>
             Specifies CLR version required to run the application.
@@ -376,6 +385,16 @@
             <remarks>
             The CLR version required to run the application. <br/> <br/>
             Xml Node Type: Element <br/> 
+            Xml Required: Y
+            </remarks> 
+        </member>
+        <member name="P:XLAutoDeploy.Manifests.CompatibleFramework.MinimumRequiredVersion">
+            <summary>
+            Specifies the minimum version of the framework required to run the application on the client.
+            </summary>  
+            <remarks>
+            The .NET Framework version required to run the application. <br/> <br/>
+            Xml Node Type: Element <br/>
             Xml Required: Y
             </remarks> 
         </member>
@@ -897,9 +916,11 @@
             If <see cref="F:XLAutoDeploy.Manifests.UpdateMode.Forced"/> then the update will be processed regardless if 
             the <see cref="P:XLAutoDeploy.Manifests.AddInIdentity.Version"/> (of the <see cref="T:XLAutoDeploy.Manifests.AddIn"/>) was incremented 
             or not. When <see cref="P:XLAutoDeploy.Manifests.UpdateBehavior.NotifyClient"/> is set to true updates will 
-            display a non-cancellable  dialog to the client that notifies them of a pending 
-            update. If <see cref="F:XLAutoDeploy.Manifests.UpdateMode.Normal"/>, then, updates can be deferred until a 
-            later time. <br/> <br/>
+            display a dialog to the client that notifies them of a pending 
+            update. If the client deferrs the update, then the add-in will not be loaded.  
+            If <see cref="F:XLAutoDeploy.Manifests.UpdateMode.Normal"/>, then, the dialog will only be displayed to 
+            the client if the the <see cref="P:XLAutoDeploy.Manifests.AddInIdentity.Version"/> (of the <see cref="T:XLAutoDeploy.Manifests.AddIn"/>) 
+            was incremented . <br/> <br/>
             Xml Node Type: Element <br/>
             Xml Required: Y 
             </remarks>
@@ -935,20 +956,9 @@
             Specifies whether or not update notifications should be displayed to the client. 
             </summary>
             <remarks>
-            If <see cref="P:RequiresRestart"/> is set to true, then this property will 
-            be ignored and the client will be notified regardless. <br/> <br/>
-            Xml Node Type: Element <br/>
-            Xml Required: Y 
-            </remarks>
-        </member>
-        <member name="P:XLAutoDeploy.Manifests.UpdateBehavior.DoInRealTime">
-            <summary>
-            Specifies whether the updates are pushed to the client machine in realtime.  
-            </summary>
-            <remarks>
-            When set to true, updates will be pushed to the client as they occur on the remote 
-            host. This only applies to remote hosts of type <see cref="P:XLAutoDeploy.Manifests.FileHost.HostType"/> 
-            equal to <see cref="F:XLAutoDeploy.Manifests.FileHostType.FileServer"/>  <br/> <br/>
+            If <see cref="P:XLAutoDeploy.Manifests.UpdateBehavior.RequiresRestart"/> is set to true, or if 
+            <see cref="P:XLAutoDeploy.Manifests.UpdateBehavior.Mode"/> == <see cref="F:XLAutoDeploy.Manifests.UpdateMode.Forced"/> then this 
+            property will be ignored and the client will be notified regardless. <br/> <br/>
             Xml Node Type: Element <br/>
             Xml Required: Y 
             </remarks>
@@ -959,8 +969,6 @@
             the next update check. 
             </summary> 
             <remarks>
-            If <see cref="P:XLAutoDeploy.Manifests.UpdateBehavior.DoInRealTime"/> is set to true, then the value of this 
-            property will be ignored. 
             Xml Node Type: Element <br/>
             Xml Required: N
             </remarks>
@@ -1093,6 +1101,11 @@
             </summary>  
         </member>
         <!-- Badly formed XML comment ignored for member "T:XLAutoDeploy.Manifests.XLAutoDeployManifest" -->
+        <member name="P:XLAutoDeploy.Manifests.XLAutoDeployManifest.Version">
+            <summary>
+            Specifies the version number of XLAutoDeploy.
+            </summary>  
+        </member>
         <member name="P:XLAutoDeploy.Manifests.XLAutoDeployManifest.DeploymentRegistryUri">
             <summary>
             Specifies the Uri of the associated <see cref="T:XLAutoDeploy.Manifests.DeploymentRegistry"/>.

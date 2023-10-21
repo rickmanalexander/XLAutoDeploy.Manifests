@@ -263,20 +263,6 @@ namespace XLAutoDeploy.Manifests.Utilities
                     $"Set either {nameof(UpdateBehavior.RequiresRestart)} or {nameof(UpdateBehavior.NotifyClient)} to true, but not both."));
             }
 
-            if (updateBehavior?.DoInRealTime == null)
-            {
-                throw new InvalidDeploymentException(Errors.GetFormatedErrorMessage(errorContext,
-                    $"The {nameof(UpdateBehavior.DoInRealTime)} is null.",
-                    $"Supply a valid value for {nameof(UpdateBehavior.DoInRealTime)}."));
-            }
-
-            if (updateBehavior.DoInRealTime & updateBehavior.Expiration != null)
-            {
-                throw new InvalidDeploymentException(Errors.GetFormatedErrorMessage(errorContext,
-                    $"A {nameof(UpdateBehavior.Expiration)} cannot be supplied if {nameof(UpdateBehavior.DoInRealTime)} is true.",
-                    $"Set either {nameof(UpdateBehavior.RequiresRestart)} or {nameof(UpdateBehavior.NotifyClient)} to true, but not both."));
-            }
-
             if (updateBehavior.Expiration != null)
             {
                 ValidateUpdateExpiration(updateBehavior.Expiration);

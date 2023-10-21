@@ -45,6 +45,33 @@ namespace XLAutoDeploy.Manifests
         public NetClrVersion SupportedRuntime { get; set; }
 
         /// <summary>
+        /// Specifies the minimum version of the framework required to run the application on the client.
+        /// </summary>  
+        /// <remarks>
+        /// The .NET Framework version required to run the application. <br/> <br/>
+        /// Xml Node Type: Element <br/>
+        /// Xml Required: Y
+        /// </remarks> 
+        //using "shim" property b/c System.Version is not serializable
+        [XmlIgnore]
+        public System.Version MinimumRequiredVersion { get; set; }
+
+        [XmlElement("MinimumRequiredVersion", IsNullable = false)]
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+        public string MinimumRequiredVersionString
+        {
+            get
+            {
+                return MinimumRequiredVersion?.ToString() ?? String.Empty;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    MinimumRequiredVersion = new Version(value);
+            }
+        }
+
+        /// <summary>
         /// Specifies the version number of the target .NET Framework.
         /// </summary>  
         /// <remarks>
