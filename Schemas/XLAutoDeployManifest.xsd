@@ -4,8 +4,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="1" maxOccurs="1" name="Version" type="xs:string" />
+		<xs:element minOccurs="1" maxOccurs="1" name="ExcelDnaVersion" type="xs:string" />
         <xs:element minOccurs="1" maxOccurs="1" name="DeploymentRegistryUri" type="xs:string" />
-      </xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="LoggerFileDirectory" type="xs:string" />
+	  </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

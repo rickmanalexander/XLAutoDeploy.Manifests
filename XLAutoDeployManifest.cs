@@ -37,6 +37,32 @@ namespace XLAutoDeploy.Manifests
         }
 
         /// <summary>
+        /// Specifies the Excel DNA version number on which XLAutoDeploy was compiled.
+        /// </summary>  
+        /// <remarks>
+        /// Xml Node Type: Element <br/>
+        /// Xml Required: Y
+        /// </remarks> 
+        //using "shim" property b/c System.Version is not serializable
+        [XmlIgnore]
+        public System.Version ExcelDnaVersion { get; set; }
+
+        [XmlElement("ExcelDnaVersion", typeof(string), IsNullable = false)]
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
+        public string ExcelDnaVersionString
+        {
+            get
+            {
+                return ExcelDnaVersion?.ToString() ?? String.Empty;
+            }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    ExcelDnaVersion = new Version(value);
+            }
+        }
+
+        /// <summary>
         /// Specifies the Uri of the associated <see cref="DeploymentRegistry"/>.
         /// </summary>  
         /// <remarks>
@@ -62,5 +88,15 @@ namespace XLAutoDeploy.Manifests
                     DeploymentRegistryUri = new Uri(value);
             }
         }
+
+        /// <summary>
+        /// Specifies the root folder/directory path for log files.
+        /// </summary>  
+        /// <remarks>
+        /// Xml Node Type: Element <br/>
+        /// Xml Required: N
+        /// </remarks> 
+        [XmlElement("LoggerFileDirectory", IsNullable = false)]
+        public string LoggerFileDirectory { get; set; }
     }
 }
