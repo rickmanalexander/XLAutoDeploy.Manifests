@@ -74,7 +74,7 @@ namespace XLAutoDeploy.Manifests
         [XmlIgnore]
         public Uri DeploymentRegistryUri { get; set; }
 
-        [XmlElement("DeploymentRegistryUri", IsNullable = false)]
+        [XmlElement("DeploymentRegistryUri", typeof(string), IsNullable = false)]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
         public string DeploymentRegistryUriString
         {
@@ -96,7 +96,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks> 
-        [XmlElement("LoggerFileDirectory", IsNullable = false)]
+        [XmlElement("LoggerFileDirectory", typeof(string), IsNullable = true)]
         public string LoggerFileDirectory { get; set; }
     }
 }
