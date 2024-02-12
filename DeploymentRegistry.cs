@@ -9,7 +9,7 @@ namespace XLAutoDeploy.Manifests
     /// </summary>  
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/DeploymentRegistry.xsd", IsNullable = false)]
+    [XmlRoot(ElementName = "DeploymentRegistry", Namespace = "https://github.com/XLAutoDeploy.Manifests/Schemas/DeploymentRegistry.xsd", IsNullable = false)]
     public sealed class DeploymentRegistry
     {
         public DeploymentRegistry() { }

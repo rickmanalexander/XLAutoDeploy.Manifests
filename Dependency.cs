@@ -80,7 +80,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: Y 
         /// </remarks>  
-        [XmlElement("ManagedAssembly", IsNullable = false)]
+        [XmlElement(IsNullable = false)]
         public bool ManagedAssembly { get; set; }
 
         /// <summary>

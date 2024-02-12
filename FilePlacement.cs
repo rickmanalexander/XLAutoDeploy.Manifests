@@ -37,7 +37,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks> 
-        [XmlElement("SubDirectory", IsNullable = false)]
+        [XmlElement(IsNullable = false)]
         public string SubDirectory { get; set; }
     }
 }

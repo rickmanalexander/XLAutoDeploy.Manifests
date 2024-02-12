@@ -9,7 +9,7 @@ namespace XLAutoDeploy.Manifests
     /// </summary>  
     [Serializable]
     [XmlType(AnonymousType = true)]
-    [XmlRoot(IsNullable = false)]
+    [XmlRoot(ElementName = "UpdateQueryInfo", IsNullable = false)]
     public sealed class UpdateQueryInfo
     {
         public UpdateQueryInfo() { }

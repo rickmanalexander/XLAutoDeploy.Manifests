@@ -62,7 +62,7 @@
 			<xs:element minOccurs="1" maxOccurs="1" name="RequiresRestart" type="xs:boolean" />
 			<xs:element minOccurs="1" maxOccurs="1" name="RemoveDeprecatedVersion" type="xs:boolean" />
 			<xs:element minOccurs="1" maxOccurs="1" name="NotifyClient" type="xs:boolean" />
-			<xs:element minOccurs="0" maxOccurs="1" name="UpdateExpiration" type="tns:UpdateExpiration" />
+			<xs:element minOccurs="0" maxOccurs="1" name="Expiration" type="tns:UpdateExpiration" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:simpleType name="UpdateMode">

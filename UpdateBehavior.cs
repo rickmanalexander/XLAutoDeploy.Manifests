@@ -79,7 +79,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks>
-        [XmlElement("UpdateExpiration", typeof(UpdateExpiration), IsNullable = false)]
+        [XmlElement("Expiration", typeof(UpdateExpiration), IsNullable = false)]
         public UpdateExpiration Expiration { get; set; }
     }
 
