@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace XLAutoDeploy.Manifests
 {
     /// <summary>
-    /// Represents the location of the <see cref="DeploymentRegistry">.
+    /// Represents the location of the <see cref="DeploymentRegistry"/>.
     /// </summary>  
     [Serializable]
     [XmlType(AnonymousType = true)]
@@ -21,7 +21,7 @@ namespace XLAutoDeploy.Manifests
         [XmlIgnore]
         public System.Version Version { get; set; }
 
-        [XmlElement("Version", typeof(string), IsNullable = false)]
+        [XmlElement("Version", IsNullable = false)]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
         public string VersionString
         {
@@ -47,7 +47,7 @@ namespace XLAutoDeploy.Manifests
         [XmlIgnore]
         public System.Version ExcelDnaVersion { get; set; }
 
-        [XmlElement("ExcelDnaVersion", typeof(string), IsNullable = false)]
+        [XmlElement("ExcelDnaVersion", IsNullable = false)]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
         public string ExcelDnaVersionString
         {
@@ -74,7 +74,7 @@ namespace XLAutoDeploy.Manifests
         [XmlIgnore]
         public Uri DeploymentRegistryUri { get; set; }
 
-        [XmlElement("DeploymentRegistryUri", typeof(string), IsNullable = false)]
+        [XmlElement("DeploymentRegistryUri", IsNullable = false)]
         [EditorBrowsable(EditorBrowsableState.Never), Browsable(false)]
         public string DeploymentRegistryUriString
         {
@@ -96,7 +96,7 @@ namespace XLAutoDeploy.Manifests
         /// Xml Node Type: Element <br/>
         /// Xml Required: N
         /// </remarks> 
-        [XmlElement("LoggerFileDirectory", typeof(string), IsNullable = true)]
+        [XmlElement("LoggerFileDirectory", IsNullable = true)]
         public string LoggerFileDirectory { get; set; }
     }
 }
